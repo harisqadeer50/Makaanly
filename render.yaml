@@ -1,0 +1,29 @@
+# Render Blueprint for the API. In Render: New > Blueprint, point it at this repository.
+# Values marked "sync: false" are asked for when you create the service; nothing secret is stored in this file.
+services:
+  - type: web
+    name: makaanly-api
+    runtime: node
+    rootDir: backend
+    plan: starter
+    buildCommand: npm ci --omit=dev
+    startCommand: node src/server.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - { key: NODE_ENV, value: production }
+      - { key: NODE_VERSION, value: "20" }
+      - { key: COOKIE_MODE, value: same-site }
+      - { key: TRUST_PROXY, value: "2" }            # the website's host proxies /api to this service (see frontend/vercel.json)
+      - { key: JWT_ACCESS_SECRET, generateValue: true }
+      - { key: CLIENT_URL, sync: false }            # e.g. https://www.example.com  (exact origin, https)
+      - { key: SITE_URL, sync: false }              # the same address, used in the sitemap
+      - { key: MONGODB_URI, sync: false }           # MongoDB Atlas connection string
+      - { key: CLOUDINARY_CLOUD_NAME, sync: false }
+      - { key: CLOUDINARY_API_KEY, sync: false }
+      - { key: CLOUDINARY_API_SECRET, sync: false }
+      - { key: SMTP_HOST, sync: false }
+      - { key: SMTP_PORT, value: "587" }
+      - { key: SMTP_USER, sync: false }
+      - { key: SMTP_PASS, sync: false }
+      - { key: EMAIL_FROM, sync: false }

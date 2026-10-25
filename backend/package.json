@@ -1,0 +1,39 @@
+{
+  "name": "makaanly-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file=.env src/server.js",
+    "start": "node src/server.js",
+    "test": "vitest run",
+    "create-admin": "node --env-file=.env scripts/createAdmin.js",
+    "sync-indexes": "node --env-file=.env scripts/syncIndexes.js",
+    "backfill-location-slugs": "node --env-file=.env scripts/backfillLocationSlugs.js",
+    "backup": "bash scripts/backup.sh",
+    "docs:api": "node scripts/listRoutes.js > ../docs/API.md"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.11.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "makaanly": "file:..",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0",
+    "multer": "^2.4.0",
+    "nodemailer": "^10.1.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0",
+    "vitest": "^5.0.5"
+  }
+}
